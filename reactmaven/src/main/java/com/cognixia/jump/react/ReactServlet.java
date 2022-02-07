@@ -1,5 +1,7 @@
 package com.cognixia.jump.react;
-
+import com.cognixia.jump.react.databaseTest.ConnectionManagerProperties;
+import com.cognixia.jump.react.databaseTest.User;
+import com.cognixia.jump.react.databaseTest.UserDAOClass;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,8 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.cognixia.jump.react.jdbc.dao.User;
-import com.cognixia.jump.react.jdbc.dao.UserDAOClass;
+
 import com.google.gson.Gson;
 
 @WebServlet("/ReactServlet")
@@ -30,7 +31,7 @@ public class ReactServlet extends HttpServlet{
 	public void init() throws ServletException {
 		
 	}
-
+/*
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		PrintWriter pw = response.getWriter();
@@ -47,41 +48,37 @@ public class ReactServlet extends HttpServlet{
 		out.print(obj);
 		out.flush();
 	}
-
+*/
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		BufferedReader br = 
-				new BufferedReader(new InputStreamReader(request.getInputStream()));
-
-		String json = "";
-		if(br != null){
+	//	BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+		String username = request.getParameter("actor-id");
+		String password = request.getParameter("password");
+		
+		/*if(br != null){
 			json = br.readLine();
 		}
 
 		JSONObject obj = new JSONObject();
 		JSONParser parser = new JSONParser();
 		
-		try {
-			JSONObject injson = (JSONObject) parser.parse(json);
-			
-			String username = (String) injson.get("username");
-			String password = (String) injson.get("password");
-			
-			System.out.println(username+" "+password);
-			
-			User user = userDAOClass.get(username, password);
-			
-			String jsonobj = gson.toJson(user);
+		
+		*/
+		UserDAOClass test = new UserDAOClass();
+		System.out.println(username);
+		System.out.println(password);
+		System.out.println(test.authenticateUser(username, password));
+		User user = test.getUserbyUsername(username);
 
-			PrintWriter out = response.getWriter();
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			out.print(jsonobj);
-			out.flush();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
+		String jsonobj = gson.toJson(user);
+		System.out.println(jsonobj);
+		PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+	out.print(jsonobj);
+		out.flush();
 
 	}
 }
