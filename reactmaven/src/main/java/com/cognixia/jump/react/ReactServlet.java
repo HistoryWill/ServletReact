@@ -54,10 +54,31 @@ public class ReactServlet extends HttpServlet{
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
-		String username = request.getParameter("actor-id");
-		String password = request.getParameter("password");
+		BufferedReader br = 
+				new BufferedReader(new InputStreamReader(request.getInputStream()));
+
+		String json = "";
+		if(br != null){
+			json = br.readLine();
+		}
+
+		JSONObject obj = new JSONObject();
+		JSONParser parser = new JSONParser();
 		
+		try {
+			JSONObject injson = (JSONObject) parser.parse(json);
+			
+			String username = (String) injson.get("username");
+			String password = (String) injson.get("password");
+			
+			System.out.println(username+" "+password);
+			
+	/*	String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		JSONObject obj = new JSONObject();
+
+		obj.put("username", "Pasang");
+		obj.put("password", "123");*/
 		UserDAOClass test = new UserDAOClass();
 		System.out.println(username);
 		System.out.println(password);
@@ -95,5 +116,8 @@ public class ReactServlet extends HttpServlet{
 		out.print(jsonobj);
 		out.flush();
 
+	}catch(ParseException e) {
+		e.printStackTrace();
+	}
 	}
 }
