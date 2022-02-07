@@ -30,6 +30,17 @@
     <filter-name>CorsFilter</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
+<servlet>
+	<servlet-name>BookPage</servlet-name>
+	<display-name>BookPage</display-name>
+	<description></description>
+	<servlet-class>com.cognixia.jump.react.BookPage</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>BookPage</servlet-name>
+	<url-pattern>/BookPage</url-pattern>
+</servlet-mapping>
+
 
   
 </web-app>
