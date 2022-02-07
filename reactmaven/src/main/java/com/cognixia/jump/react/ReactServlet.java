@@ -1,5 +1,7 @@
 package com.cognixia.jump.react;
+import com.cognixia.jump.react.databaseTest.BadUserIdException;
 import com.cognixia.jump.react.databaseTest.ConnectionManagerProperties;
+import com.cognixia.jump.react.databaseTest.IncorrectPasswordException;
 import com.cognixia.jump.react.databaseTest.User;
 import com.cognixia.jump.react.databaseTest.UserDAOClass;
 import java.io.BufferedReader;
@@ -52,24 +54,37 @@ public class ReactServlet extends HttpServlet{
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	//	BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+	
 		String username = request.getParameter("actor-id");
 		String password = request.getParameter("password");
 		
-		/*if(br != null){
-			json = br.readLine();
-		}
-
-		JSONObject obj = new JSONObject();
-		JSONParser parser = new JSONParser();
-		
-		
-		*/
 		UserDAOClass test = new UserDAOClass();
 		System.out.println(username);
 		System.out.println(password);
+		boolean login = false;
+		User user = null;
 		System.out.println(test.authenticateUser(username, password));
-		User user = test.getUserbyUsername(username);
+		try{
+			login = test.authenticateUser(username, password);
+			
+			if(login == false) {
+				user = test.getUserbyUsername(username);
+				if(user == null) {
+					throw new BadUserIdException();
+				}else {
+					throw new IncorrectPasswordException();
+				}
+				
+			}
+			
+			
+		}catch(BadUserIdException e){
+			e.getMessage();
+			
+		}catch(IncorrectPasswordException e) {
+			e.getMessage();
+		}
+		 user = test.getUserbyUsername(username);
 
 		
 		String jsonobj = gson.toJson(user);
@@ -77,7 +92,7 @@ public class ReactServlet extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-	out.print(jsonobj);
+		out.print(jsonobj);
 		out.flush();
 
 	}

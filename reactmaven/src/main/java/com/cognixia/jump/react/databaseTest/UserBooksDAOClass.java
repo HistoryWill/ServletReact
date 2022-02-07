@@ -49,7 +49,7 @@ public class UserBooksDAOClass implements UserBooksDAO {
 			rs.close();
 			pstmt.close();
 
-			conn.close();
+		//	conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +107,7 @@ public class UserBooksDAOClass implements UserBooksDAO {
 				rs.close();
 				pstmt.close();
 
-				conn.close();
+			//	conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -152,7 +152,7 @@ public class UserBooksDAOClass implements UserBooksDAO {
 				rs.close();
 				pstmt.close();
 
-				conn.close();
+			//	conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
