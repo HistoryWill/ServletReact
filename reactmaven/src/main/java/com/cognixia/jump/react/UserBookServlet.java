@@ -59,9 +59,9 @@ public class UserBookServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 		BufferedReader br = 
 				new BufferedReader(new InputStreamReader(request.getInputStream()));
 
@@ -72,15 +72,15 @@ public class UserBookServlet extends HttpServlet {
 
 		JSONObject obj = new JSONObject();
 		JSONParser parser = new JSONParser();
-		
+		System.out.println(obj);
 		
 		try {
 			JSONObject injson = (JSONObject) parser.parse(json);
 			String username = (String) injson.get("userID");
 			int userID = Integer.parseInt(username);
+			
 		List<UserBook> userBookList = userBooks.getUserBookbyId(userID);
 		String jsonobj  = gson.toJson(userBookList);
-		
 		System.out.println(jsonobj);
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
@@ -88,7 +88,7 @@ public class UserBookServlet extends HttpServlet {
 		out.print(jsonobj);
 		out.flush();
 		
-		}catch(ParseException e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		

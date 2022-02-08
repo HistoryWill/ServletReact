@@ -51,7 +51,7 @@ public class BookDAOClass implements BookDAO {
 				rs.close();
 				pstmt.close();
 
-				conn.close();
+			//	conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

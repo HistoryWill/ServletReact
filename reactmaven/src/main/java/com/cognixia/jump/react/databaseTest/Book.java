@@ -2,10 +2,11 @@ package com.cognixia.jump.react.databaseTest;
 
 public class Book {
 	
-	private String Title;
-	private int bookid;
-	private String Author;
-	private String Publisher;
+	private int bookID;
+	private String title;
+	
+	private String authorName;
+	private String publisher;
 	private String Genre;
 	private String coverURL;
 	private String description;
@@ -15,14 +16,15 @@ public class Book {
 	private Integer franchiseId;
 	private int seriesOrder;
 	private Integer seriesId;
-	public Book(int id, String title, String author, String publisher,int pageCount, String genre, Integer seriesId, int seriesOrder, boolean released,  Integer franchiseId, String coverURL, String description 
+	public Book(int id, String title, String authorName, String publisher,int pageCount, String genre, Integer seriesId, int seriesOrder, boolean released,  Integer franchiseId, String coverURL, String description 
 			   ) {
 		
-		Title = title;
-		this.bookid = id;
-		Author = author;
-		Publisher = publisher;
-		Genre = genre;
+		
+		this.bookID = id;
+		this.title = title;
+		this.authorName = authorName;
+		this.publisher = publisher;
+		Genre = genre;	
 		this.coverURL = coverURL;
 		Released = released;
 		this.pageCount = pageCount;
@@ -33,34 +35,34 @@ public class Book {
 	}
 	@Override
 	public String toString() {
-		return "Book [Title=" + Title + ", id=" + bookid + ", Author=" + Author + ", Publisher=" + Publisher + ", Genre="
+		return "Book [Title=" + title + ", id=" + bookID + ", Author=" + authorName + ", Publisher=" + publisher + ", Genre="
 				+ Genre + ", coverURL=" + coverURL + ", description=" + description + ", Released=" + Released
 				+ ", pageCount=" + pageCount + ", franchiseId=" + franchiseId + ", seriesOrder=" + seriesOrder
 				+ ", seriesId=" + seriesId + "]";
 	}
 	public String getTitle() {
-		return Title;
+		return title;
 	}
 	public void setTitle(String title) {
-		Title = title;
+		this.title = title;
 	}
 	public int getBookId() {
-		return bookid;
+		return bookID;
 	}
 	public void setBookId(int id) {
-		this.bookid = id;
+		this.bookID = id;
 	}
 	public String getAuthor() {
-		return Author;
+		return authorName;
 	}
 	public void setAuthor(String author) {
-		Author = author;
+		this.authorName = author;
 	}
 	public String getPublisher() {
-		return Publisher;
+		return publisher;
 	}
 	public void setPublisher(String publisher) {
-		Publisher = publisher;
+		this.publisher = publisher;
 	}
 	public String getGenre() {
 		return Genre;

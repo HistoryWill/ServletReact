@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class BookPage
  */
+@WebServlet("/BookServlet")
 public class BookPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Gson gson = new Gson();
@@ -42,7 +44,7 @@ public class BookPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	//	response.getWriter().append("Served at: ").append(request.getContextPath());
 			BookDAOClass bookDAO = new BookDAOClass();
 		List<Book> BookList = bookDAO.getAllBooks();
 		String jsonobj  = gson.toJson(BookList);
